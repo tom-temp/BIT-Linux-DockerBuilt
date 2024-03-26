@@ -7,7 +7,8 @@ RUN set -xe && xbps-install -S
 
 # install
 # need other package
-RUN set -xe && xbps-install -y glibc-locales ncurses git bash curl wget vim dust unzip ripgrep fd openssh dcron rclone
+RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip ripgrep fd openssh dcron rclone
+#  RUN set -xe && xbps-install -y glibc-locales
 
 # timezone
 RUN ln -sf /usr/share/zoneinfo/Hongkong /etc/localtime
