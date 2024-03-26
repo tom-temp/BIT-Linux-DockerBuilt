@@ -55,15 +55,15 @@ ARG CONDA_VERSION="24.1.2"
 ARG MINIFORGE_PATCH_NUMBER="0"
 ARG MINIFORGE_TYPE="Miniforge3"
 ARG MINIFORGE_VERSION="${CONDA_VERSION}-${MINIFORGE_PATCH_NUMBER}"
-ARG MINIFORGE_INSTALLER="${MINIFORGE_TYPE}-${MINIFORGE_VERSION}-Linux-$(uname -m).sh"
+ARG MINIFORGE_INSTALLER="${MINIFORGE_TYPE}-${MINIFORGE_VERSION}-Linux"
 # ARG MINIFORGE_INSTALLER="${MINIFORGE_TYPE}-${MINIFORGE_VERSION}-Linux-x86_64.sh"
 
 WORKDIR /opt
 RUN set -xe && \
-    wget --quiet "https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/${MINIFORGE_INSTALLER}" && \
-    chmod +x ${MINIFORGE_INSTALLER} && \
-    /bin/bash "${MINIFORGE_INSTALLER}" -f -b -p $CONDA_DIR && \
-    rm ${MINIFORGE_INSTALLER}
+    wget --quiet "https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/${MINIFORGE_INSTALLER}-$(uname -m).sh" && \
+    chmod +x ${MINIFORGE_INSTALLER}-$(uname -m).sh && \
+    /bin/bash "${MINIFORGE_INSTALLER}-$(uname -m).sh" -f -b -p $CONDA_DIR && \
+    rm ${MINIFORGE_INSTALLER}-$(uname -m).sh
 # echo "${MINIFORGE_CHECKSUM} *${MINIFORGE_INSTALLER}" | sha256sum --check && \ # make a note
 
 
