@@ -10,7 +10,7 @@ on:
 
 env:
   APP_NAME: void-SSH
-  DOCKERHUB_REPO: tomtemp1416/void-SSH
+  DOCKERHUB_REPO: tomtemp1416/void-ssh
 
 jobs:
   build:
