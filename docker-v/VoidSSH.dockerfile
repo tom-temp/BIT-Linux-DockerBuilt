@@ -7,7 +7,7 @@ RUN set -xe && xbps-install -S
 
 # install
 # need other package
-RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip ripgrep fd openssh dcron exa zoxide procs glow starship atuin stow 
+RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip xz ripgrep fd openssh dcron exa zoxide procs glow starship atuin stow 
 #  RUN set -xe && xbps-install -y glibc-locales
 
 # timezone
