@@ -4,7 +4,7 @@ name: Build Docker Image FOR WorkDt-void
 on:
   push:
     branches:
-      - master
+      - main
     paths: # 路径
       - work-DT/void-workdt.dockerfile
 
@@ -15,7 +15,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: docker-build
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Generate App Version
-        run: echo APP_VERSION=`date "+%Y%M%d%H%M"` >> $GITHUB_ENV  
+        run: echo APP_VERSION=`date "+%Y%M%d%H%M"` >> $GITHUB_ENV
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -47,5 +47,5 @@ jobs:
             ${{ env.DOCKERHUB_REPO }}:latest
             ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
 
-        
+
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
