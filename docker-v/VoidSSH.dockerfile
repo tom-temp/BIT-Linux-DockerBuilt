@@ -56,7 +56,7 @@ RUN set -xe && \
     stow tmux && \
     mkdir -p /home/tom/.local/bin/ && \
     ln -s /home/tom/.config/tmux/layout.default.sh /home/tom/.local/bin/tm && \
-    mv /home/tom/.bashrc /home/tom/bashrc.bac
+    mv /home/tom/.bashrc /home/tom/bashrc.bac && \
     stow bash
 
 USER root
