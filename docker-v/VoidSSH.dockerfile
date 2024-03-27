@@ -7,7 +7,7 @@ RUN set -xe && xbps-install -S
 
 # install
 # need other package
-RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip xz ripgrep fd openssh dcron exa zoxide procs glow starship atuin stow 
+RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip xz ripgrep fd openssh dcron exa zoxide procs glow starship atuin stow bash-preexec
 #  RUN set -xe && xbps-install -y glibc-locales
 
 # timezone
@@ -48,8 +48,7 @@ WORKDIR /home/tom
 RUN set -xe && \
     git clone --depth=1 https://github.com/tom-temp/linux-dotfiles.git ./linux-dotfiles && \
     git clone https://github.com/tmux-plugins/tpm /home/tom/.tmux/plugins/tpm && \
-    wget -O - https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf - && \
-    bash ble-nightly/ble.sh --install ~/.local/share
+    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
 WORKDIR /home/tom/linux-dotfiles
 RUN set -xe && \
     stow vim && \
@@ -57,7 +56,13 @@ RUN set -xe && \
     mkdir -p /home/tom/.local/bin/ && \
     ln -s /home/tom/.config/tmux/layout.default.sh /home/tom/.local/bin/tm && \
     mv /home/tom/.bashrc /home/tom/bashrc.bac && \
-    stow bash
+    stow bash && \
+    ~/.bash_it/install.sh -a &&\
+    sourch ~/.bashrc && \
+    bash-it disable alias general && \
+    bash-it enable plugins sudo tmux && \
+    cp ./bash/.config/bashit/barbuk.theme.bash ../.bash_it/themes/barbuk/barbuk.theme.bash &&\
+    echo "export BASH_IT_THEME='barbuk'" >> ~/.bashrc
 
 USER root
 EXPOSE 18022
