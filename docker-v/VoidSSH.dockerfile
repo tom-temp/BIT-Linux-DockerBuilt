@@ -58,9 +58,6 @@ RUN set -xe && \
     mv /home/tom/.bashrc /home/tom/bashrc.bac && \
     stow bash && \
     ~/.bash_it/install.sh -a &&\
-    source ~/.bashrc && \
-    bash-it disable alias general && \
-    bash-it enable plugins sudo tmux && \
     cp ./bash/.config/bashit/barbuk.theme.bash ../.bash_it/themes/barbuk/barbuk.theme.bash &&\
     echo "export BASH_IT_THEME='barbuk'" >> ~/.bashrc
 
