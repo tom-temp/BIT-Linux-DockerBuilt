@@ -73,7 +73,7 @@ RUN set -xe && \
 
 # set VENV, needchange
 RUN set -xe && \
-    conda create -n excel python=3.8.16 pandas=1.5.3 xlrd=2.0.1 -y
+    conda create -n excel python=3.8.16 pandas=1.5.3 xlrd=2.0.1 openpyxl=3.0.9 -y
 
 
 EXPOSE 18022
