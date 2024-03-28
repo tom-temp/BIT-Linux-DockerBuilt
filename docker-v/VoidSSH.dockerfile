@@ -28,7 +28,11 @@ RUN mkdir /var/run/sshd
 RUN mkdir /root/.ssh
 RUN echo 'root:root' | chpasswd
 
-RUN useradd tom && echo 'tom:tom' |chpasswd
+RUN useradd tom && echo 'tom:tom' | chpasswd && \
+    mkdir -p /home/tom && \
+    chowm tom:tom /home/tom -R && \
+    mkdir -p /tmp &&\
+    chmod 777 /tmp
 
 RUN ssh-keygen -A
 
