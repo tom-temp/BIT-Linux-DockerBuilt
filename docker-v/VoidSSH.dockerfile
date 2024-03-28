@@ -30,7 +30,7 @@ RUN echo 'root:root' | chpasswd
 
 RUN useradd tom && echo 'tom:tom' | chpasswd && \
     mkdir -p /home/tom && \
-    chowm tom:tom /home/tom -R && \
+    chown tom:tom /home/tom -R && \
     mkdir -p /tmp &&\
     chmod 777 /tmp
 
