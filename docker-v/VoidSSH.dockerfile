@@ -7,7 +7,7 @@ RUN set -xe && xbps-install -S
 
 # install
 # need other package
-RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip xz ripgrep fd openssh dcron exa zoxide procs glow starship atuin stow bash-preexec
+RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip xz ripgrep fd openssh dcron exa zoxide procs glow starship atuin stow bash-preexec ttyd tmux
 #  RUN set -xe && xbps-install -y glibc-locales
 
 # timezone
@@ -42,6 +42,7 @@ RUN echo "#!/bin/bash"                                            >  /start.sh
 RUN echo "echo log start: $(date '+%Y-%m-%d %H:%m') >> /log.log"  >> /start.sh
 RUN echo "/usr/sbin/sshd  -E /log.log"                            >> /start.sh
 Run echo "/usr/sbin/crond -L /log.log"                            >> /start.sh
+Run echo "/usr/bin/ttyd -p 18021 -m 2 login >> /log.log 2>&1 &"   >> /start.sh
 RUN echo "tail -f /log.log"                                       >> /start.sh
 RUN chmod +x /start.sh
 
@@ -59,13 +60,16 @@ RUN set -xe && \
     stow tmux && \
     mkdir -p /home/tom/.local/bin/ && \
     ln -s /home/tom/.config/tmux/layout.default.sh /home/tom/.local/bin/tm && \
+    chmod +x /home/tom/.local/bin/tm && \
     mv /home/tom/.bashrc /home/tom/bashrc.bac && \
     stow bash && \
     ~/.bash_it/install.sh -a &&\
     cp ./bash/.config/bashit/barbuk.theme.bash ../.bash_it/themes/barbuk/barbuk.theme.bash &&\
-    echo "export BASH_IT_THEME='barbuk'" >> ~/.bashrc
+    echo "export BASH_IT_THEME='barbuk'" >> ~/.bashrc &&\
+    echo "/home/tom/.local/bin/tm" >> ~/.bashrc &&\
+    chown tom:tom -R /home/tom/
 
 USER root
-EXPOSE 18022
+EXPOSE 18021 18022
 ENTRYPOINT  ["/bin/bash", "-c", "/start.sh"]
 
