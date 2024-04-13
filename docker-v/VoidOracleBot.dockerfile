@@ -42,7 +42,7 @@ RUN xbps-install -y openjdk17
 
 # start script
 # ==================================
-COPY VoidOracleBotStart.sh /start.sh
+COPY ./VoidOracleBotStart.sh /start.sh
 RUN chmod +x /start.sh
 WORKDIR /opt
 
