@@ -39,7 +39,6 @@ RUN ssh-keygen -A
 # environment
 # ===================================
 RUN xbps-install -y openjdk17
-
 # start script
 # ==================================
 COPY ./docker-v/VoidOracleBotStart.sh /start.sh

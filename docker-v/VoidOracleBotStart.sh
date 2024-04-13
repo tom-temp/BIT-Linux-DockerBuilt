@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /opt/
-if [[ -f /opt/r_client.jar ]]; then
+if [[ ! -f /opt/r_client.jar ]]; then
     rm -rf /opt/*
     wget -O gz_client_bot.tar.gz  https://github.com/semicons/java_oci_manage/releases/latest/download/gz_client_bot.tar.gz && tar -zxvf gz_client_bot.tar.gz --exclude=client_config  && tar -zxvf gz_client_bot.tar.gz --skip-old-files client_config && chmod +x sh_client_bot.sh
 fi
