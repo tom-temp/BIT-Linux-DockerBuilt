@@ -7,7 +7,7 @@ RUN set -xe && xbps-install -S
 
 # install
 # need other package
-RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip ripgrep fd openssh dcron rclone
+RUN set -xe && xbps-install -y ncurses git bash curl wget vim dust unzip ripgrep fd openssh dcron rclone ttyd
 #  RUN set -xe && xbps-install -y glibc-locales
 
 # timezone
@@ -36,6 +36,10 @@ RUN useradd tom && echo 'tom:tom' | chpasswd && \
 
 RUN ssh-keygen -A
 
+# environment
+# ===================================
+RUN xbps-install -y openjdk17
+
 # start script
 # ==================================
 COPY VoidOracleBotStart.sh /start.sh
@@ -43,11 +47,6 @@ RUN chmod +x /start.sh
 WORKDIR /opt
 
 
-
-# environment
-# ===================================
-xbps-install -y openjdk17
-
-EXPOSE 18022
+EXPOSE 18021 18022
 ENTRYPOINT  ["/bin/bash", "-c", "/start.sh"]
 

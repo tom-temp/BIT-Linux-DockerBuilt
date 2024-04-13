@@ -9,7 +9,7 @@ fi
 echo log start: $(date '+%Y-%m-%d %H:%m') >> /opt/log.log
 /usr/sbin/sshd  -E /opt/log.log
 /usr/sbin/crond -L /opt/log.log
-
+/usr/bin/ttyd -p 18021 -m 2 login >> /log.log 2>&1 &
 
 while [[ ! -f client_config ]]; do
     sleep 30
